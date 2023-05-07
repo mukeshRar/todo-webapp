@@ -7,7 +7,7 @@ require("dotenv").config();
 
 const srvr = process.env.N1_KEY; 
 const srvrCred = process.env.N1_SECRET;
-const uri= process.env.N1_URI;
+
 
 const app = express();
 
@@ -19,7 +19,7 @@ main().catch((err) => console.log(err));
 
 
 async function main() {
-  await mongoose.connect(uri);
+  await mongoose.connect("mongodb+srv://"+srvr+":"+srvrCred+"@cluster0.1iafpek.mongodb.net/toDoListDB");
 }
 
 
