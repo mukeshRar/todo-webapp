@@ -4,16 +4,19 @@ const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
 const _= require("lodash");
 require("dotenv").config(); 
+const path= require("path");
 
 const srvr = process.env.N1_KEY; 
 const srvrCred = process.env.N1_SECRET;
 
 
 const app = express();
+const viewPath= path.join(__dirname,"../views");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.set("views", viewPath);
 
 main().catch((err) => console.log(err));
 
