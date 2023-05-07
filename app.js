@@ -60,7 +60,7 @@ app.get("/", function (req, res) {
       }
     })
     .then((savedItem) => {
-      res.render("list", {
+      res.render("list.ejs", {
         listTitle: day,
         newListItems: savedItem,
       });
@@ -83,7 +83,7 @@ app.get("/:customListName", function(req, res){
 
         res.redirect("/"+customListName);
       }else{
-        res.render("list", {listTitle: customListName, newListItems: foundItem.items});
+        res.render("list.ejs", {listTitle: customListName, newListItems: foundItem.items});
       }
   })
 });
