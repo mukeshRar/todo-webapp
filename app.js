@@ -7,7 +7,7 @@ require("dotenv").config();
 
 const srvr = process.env.N1_KEY; 
 const srvrCred = process.env.N1_SECRET;
-
+const uri= process.env.N1_URI;
 
 const app = express();
 
@@ -15,12 +15,11 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-main().catch((err) => console.log(err));
 
 
-async function main() {
+const connectDB= async ()=>{
   await mongoose.connect("mongodb+srv://"+srvr+":"+srvrCred+"@cluster0.1iafpek.mongodb.net/toDoListDB");
-}
+};
 
 
 const itemsSchema = {
@@ -127,6 +126,8 @@ if(port==null || port==""){
   port=3000;
 }
 
-app.listen(port, () => {
-  console.log("Server is up and running at port:3000...");
-});
+connectDB().then(()=>{
+  app.listen(port, () => {
+    console.log("Server is up and running at port:3000...");
+  });
+})
